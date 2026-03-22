@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <title>Nexus | Modern Contact</title>
+    <!-- Google Fonts + Tailwind CSS + Font Awesome (via CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <!-- Animate.css (optional micro interactions) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <link rel="stylesheet" href="contact.css" />
+  </head>
+  <body class="flex items-center justify-center p-5 md:p-8">
+    <!-- Main React Root -->
+    <div id="root" class="w-full max-w-7xl mx-auto"></div>
+
+    <!-- Using React, ReactDOM, and Babel Standalone for a modern FSD-like component approach -->
+    <script src="https://unpkg.com/react@18.2.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <script type="text/babel">
+      // --- FSD-inspired structure: components/features (modular)
+      // ContactForm component with loading animation, validation, and fake submit
+
+      const { useState, useEffect, useRef } = React;
+
+      // Loading Overlay Component (modern & sleek)
+      const LoadingAnimation = ({ visible }) => {
+        if (!visible) return null;
+        return (
+          <div className="loader-container fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-md transition-all duration-300">
+            <div className="bg-white/5 rounded-2xl p-8 flex flex-col items-center gap-4 border border-white/20 shadow-2xl">
+              <div className="spin-loader"></div>
+              <p className="text-white/80 font-medium tracking-wide text-sm animate-pulse">
+                Sending message...
+              </p>
+            </div>
+          </div>
+        );
+      };
+
+      // Success Toast / Banner component (modern inline)
+      const SuccessBanner = ({ message, onDismiss }) => {
+        useEffect(() => {
+          const timer = setTimeout(() => {
+            onDismiss();
+          }, 4000);
+          return () => clearTimeout(timer);
+        }, [onDismiss]);
+
+        return (
+          <div className="success-check fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-full shadow-2xl flex items-center gap-3 text-sm md:text-base font-medium backdrop-blur-sm">
+            <i className="fas fa-check-circle text-white text-lg"></i>
+            <span>{message}</span>
+            <button
+              onClick={onDismiss}
+              className="ml-2 text-white/80 hover:text-white transition"
+            >
+              <i className="fas fa-times"></i>
+            </button>
+          </div>
+        );
+      };
+
+      // Custom Input Field with floating label style (modern)
+      const InputField = ({
+        label,
+        name,
+        type = "text",
+        value,
+        onChange,
+        required,
+        icon,
+        textarea = false,
+        rows = 3,
+      }) => {
+        const [focused, setFocused] = useState(false);
+        const hasValue = value && value.length > 0;
+        const active = focused || hasValue;
+
+        const baseClasses =
+          "w-full bg-white/5 border border-white/20 rounded-xl px-4 py-3 text-white placeholder-transparent focus:outline-none focus:border-blue-400 transition-all duration-200 peer";
+        const labelClasses = `absolute left-4 transition-all duration-200 pointer-events-none text-gray-400 ${active ? "-top-2.5 text-xs bg-gray-900/80 px-1 text-blue-400" : "top-3.5 text-sm"}`;
+
+        return (
+          <div className="relative mb-5">
+            {!textarea ? (
+              <input
+                type={type}
+                name={name}
+                id={name}
+                value={value}
+                onChange={onChange}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                className={baseClasses}
+                required={required}
+              />
+            ) : (
+              <textarea
+                name={name}
+                id={name}
+                rows={rows}
+                value={value}
+                onChange={onChange}
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                className={`${baseClasses} resize-none`}
+                required={required}
+              />
+            )}
+            <label htmlFor={name} className={labelClasses}>
+              {icon && <i className={`${icon} mr-1 text-xs`}></i>} {label}
+            </label>
+          </div>
+        );
+      };
+
+      // Main Contact Page Component (Modern UI)
+      const ContactPage = () => {
+        const [formData, setFormData] = useState({
+          fullName: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+        const [loading, setLoading] = useState(false);
+        const [successMsg, setSuccessMsg] = useState(null);
+        const [errors, setErrors] = useState({});
+
+        // Handle change
+        const handleChange = (e) => {
+          const { name, value } = e.target;
+          setFormData((prev) => ({ ...prev, [name]: value }));
+          // clear field error if exists
+          if (errors[name]) {
+            setErrors((prev) => ({ ...prev, [name]: null }));
+          }
+        };
+
+        // Validate fields
+        const validate = () => {
+          const newErrors = {};
+          if (!formData.fullName.trim())
+            newErrors.fullName = "Full name is required";
+          if (!formData.email.trim())
+            newErrors.email = "Email address is required";
+          else if (!/^\S+@\S+\.\S+$/.test(formData.email))
+            newErrors.email = "Invalid email format";
+          if (!formData.subject.trim())
+            newErrors.subject = "Subject is required";
+          if (!formData.message.trim())
+            newErrors.message = "Message cannot be empty";
+          setErrors(newErrors);
+          return Object.keys(newErrors).length === 0;
+        };
+
+        // Simulate API call with loading animation (modern async)
+        const submitForm = async (data) => {
+          // Fake network request (simulate backend latency)
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              // mock response success
+              resolve({
+                success: true,
+                message:
+                  "Your message has been delivered! We'll get back soon.",
+              });
+            }, 1800);
+          });
+        };
+
+        const handleSubmit = async (e) => {
+          e.preventDefault();
+          if (!validate()) return;
+
+          setLoading(true);
+          try {
+            const response = await submitForm(formData);
+            if (response.success) {
+              setSuccessMsg(response.message);
+              // reset form
+              setFormData({
+                fullName: "",
+                email: "",
+                subject: "",
+                message: "",
+              });
+              setErrors({});
+            } else {
+              // fallback (should not happen but safe)
+              setSuccessMsg("Something went wrong, please try again.");
+            }
+          } catch (err) {
+            setSuccessMsg("Network error. Please check your connection.");
+          } finally {
+            setLoading(false);
+            // auto-dismiss success banner handled by component itself
+          }
+        };
+
+        const dismissSuccess = () => setSuccessMsg(null);
+
+        // Social & contact info items
+        const contactMethods = [
+          {
+            icon: "fas fa-envelope",
+            title: "Email us",
+            detail: "hello@nexuscreative.com",
+            link: "mailto:hello@nexuscreative.com",
+          },
+          {
+            icon: "fas fa-phone-alt",
+            title: "Call us",
+            detail: "+1 (415) 867-5309",
+            link: "tel:+14158675309",
+          },
+          {
+            icon: "fab fa-discord",
+            title: "Discord",
+            detail: "nexus.support",
+            link: "#",
+          },
+          {
+            icon: "fab fa-github",
+            title: "GitHub",
+            detail: "/nexus-studio",
+            link: "#",
+          },
+        ];
+
+        return (
+          <div className="min-h-screen flex items-center justify-center py-10 px-4">
+            <LoadingAnimation visible={loading} />
+            {successMsg && (
+              <SuccessBanner message={successMsg} onDismiss={dismissSuccess} />
+            )}
+
+            <div className="grid lg:grid-cols-5 gap-8 w-full max-w-6xl">
+              {/* Left Side - Contact Info & Brand (modern glassmorphism) */}
+              <div className="lg:col-span-2 bg-white/5 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl glow-card transition-all hover:shadow-blue-500/10">
+                <div className="mb-8">
+                  <div className="inline-flex items-center gap-2 bg-blue-500/20 px-4 py-1.5 rounded-full border border-blue-400/30 mb-5">
+                    <i className="fas fa-comment-dots text-blue-300 text-sm"></i>
+                    <span className="text-blue-200 text-xs font-medium tracking-wide">
+                      CONNECT WITH US
+                    </span>
+                  </div>
+                  <h1 className="text-3xl md:text-4xl font-bold text-white leading-tight tracking-tight">
+                    Let's talk<span className="text-blue-400">.</span>
+                  </h1>
+                  <p className="text-gray-300 mt-3 text-base leading-relaxed">
+                    Have a project or question? Reach out — our team typically
+                    responds within 24 hours.
+                  </p>
+                </div>
+
+                <div className="space-y-6 mt-8">
+                  {contactMethods.map((method, idx) => (
+                    <a
+                      key={idx}
+                      href={method.link}
+                      className="flex items-center gap-4 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-200 group"
+                      target={method.link !== "#" ? "_blank" : undefined}
+                      rel="noopener noreferrer"
+                    >
+                      <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 group-hover:scale-110 transition-transform">
+                        <i className={`${method.icon} text-lg`}></i>
+                      </div>
+                      <div>
+                        <p className="text-gray-400 text-xs uppercase tracking-wider">
+                          {method.title}
+                        </p>
+                        <p className="text-white font-medium text-sm md:text-base group-hover:text-blue-300 transition">
+                          {method.detail}
+                        </p>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+
+                <div className="mt-10 pt-6 border-t border-white/10">
+                  <div className="flex space-x-5">
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-blue-400 transition text-xl"
+                    >
+                      <i className="fab fa-twitter"></i>
+                    </a>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-blue-400 transition text-xl"
+                    >
+                      <i className="fab fa-linkedin-in"></i>
+                    </a>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-blue-400 transition text-xl"
+                    >
+                      <i className="fab fa-instagram"></i>
+                    </a>
+                    <a
+                      href="#"
+                      className="text-gray-400 hover:text-blue-400 transition text-xl"
+                    >
+                      <i className="fab fa-dribbble"></i>
+                    </a>
+                  </div>
+                  <p className="text-gray-500 text-xs mt-4">
+                    © 2025 Nexus Studio — All visions realized
+                  </p>
+                </div>
+              </div>
+
+              {/* Right Side - Contact Form (modern with loading states) */}
+              <div className="lg:col-span-3 bg-white/5 backdrop-blur-lg rounded-2xl p-6 md:p-8 border border-white/10 shadow-2xl glow-card">
+                <div className="mb-6 flex items-center gap-2">
+                  <div className="h-6 w-1 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
+                  <h2 className="text-2xl font-semibold text-white">
+                    Send a message
+                  </h2>
+                </div>
+                <form onSubmit={handleSubmit} className="space-y-1">
+                  <InputField
+                    label="Full name"
+                    name="fullName"
+                    type="text"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    icon="fas fa-user"
+                  />
+                  {errors.fullName && (
+                    <p className="text-red-400 text-xs -mt-3 mb-2 flex items-center gap-1">
+                      <i className="fas fa-exclamation-circle"></i>
+                      {errors.fullName}
+                    </p>
+                  )}
+
+                  <InputField
+                    label="Email address"
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    icon="fas fa-envelope"
+                  />
+                  {errors.email && (
+                    <p className="text-red-400 text-xs -mt-3 mb-2 flex items-center gap-1">
+                      <i className="fas fa-exclamation-circle"></i>
+                      {errors.email}
+                    </p>
+                  )}
+
+                  <InputField
+                    label="Subject"
+                    name="subject"
+                    type="text"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    required
+                    icon="fas fa-tag"
+                  />
+                  {errors.subject && (
+                    <p className="text-red-400 text-xs -mt-3 mb-2 flex items-center gap-1">
+                      <i className="fas fa-exclamation-circle"></i>
+                      {errors.subject}
+                    </p>
+                  )}
+
+                  <InputField
+                    label="Your message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    textarea
+                    rows={4}
+                    icon="fas fa-pen-fancy"
+                  />
+                  {errors.message && (
+                    <p className="text-red-400 text-xs -mt-3 mb-2 flex items-center gap-1">
+                      <i className="fas fa-exclamation-circle"></i>
+                      {errors.message}
+                    </p>
+                  )}
+
+                  <div className="pt-4">
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-semibold py-3.5 px-6 rounded-xl transition-all duration-300 shadow-lg shadow-blue-500/25 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 group"
+                    >
+                      {loading ? (
+                        <>
+                          <svg
+                            className="animate-spin h-5 w-5 text-white"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            ></circle>
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                            ></path>
+                          </svg>
+                          <span>Sending...</span>
+                        </>
+                      ) : (
+                        <>
+                          <span>Send message</span>
+                          <i className="fas fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                  <p className="text-center text-gray-400 text-xs mt-6">
+                    <i className="fas fa-lock mr-1"></i> Your info is encrypted
+                    and never shared.
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        );
+      };
+
+      // Render App with a modern wrapper (FSD-style root)
+      const App = () => {
+        return (
+          <div className="w-full relative">
+            <ContactPage />
+          </div>
+        );
+      };
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FULL‑STACK CORE ·Showcase</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link rel="stylesheet" href="skills.css" />
+  </head>
+  <body>
+    <!-- ✦ GLASS NAVBAR (integrated) ✦ -->
+    <nav class="navbar">
+      <div class="logo">
+        <a href="#"><i class="fas fa-code"></i> devproject</a>
+      </div>
+      <div class="nav-links">
+        <a href="../index.html"><i class="fas fa-home"></i> Main Page</a>
+        <a href="../Projects/project.html"
+          ><i class="fas fa-layer-group"></i> Projects</a
+        >
+        <a href="../Contact/contact.html"
+          ><i class="fas fa-users"></i> Contact</a
+        >
+        <a href="../Login/login.html"
+          ><i class="fas fa-chart-line"></i> LogIn</a
+        >
+      </div>
+      <div class="nav-right">
+        <div class="icon-btn"><i class="fas fa-search"></i></div>
+        <div class="icon-btn"><i class="fas fa-bell"></i></div>
+        <div class="icon-btn"><i class="fas fa-user-astronaut"></i></div>
+      </div>
+    </nav>
+
+    <!-- ✦ UNIQUE LOADING ANIMATION – HEX CORE ✦ -->
+    <div class="loader-container" id="loader">
+      <div class="core-loader">
+        <div class="hex-wrap">
+          <div class="hex"></div>
+          <div class="hex"></div>
+          <div class="hex"></div>
+        </div>
+        <div class="loader-text">FULL·STACK</div>
+        <div class="loader-bar"></div>
+      </div>
+    </div>
+
+    <!-- MAIN SKILL SHOWCASE CARD -->
+    <div
+      class="showcase"
+      id="mainContent"
+      style="opacity: 0; transition: opacity 0.8s ease 0.1s"
+    >
+      <!-- PRO HEADER -->
+      <div class="pro-header">
+        <div class="identity">
+          <h1>Yash Rajput</h1>
+          <div class="badge">
+            <span>FULL‑STACK CORE</span>
+            <span>DEVOPS FLOW</span>
+            <span>VIBE CODING</span>
+          </div>
+        </div>
+        <div class="exclusive-icon">
+          <i class="fas fa-database"></i>
+          <i class="fas fa-cloud"></i>
+          <i class="fas fa-cubes"></i>
+          <i class="fas fa-laptop-code"></i>
+        </div>
+      </div>
+
+      <!-- SKILL MATRIX (like pro showcase) -->
+      <div class="skill-matrix">
+        <!-- frontend core -->
+        <div class="skill-card">
+          <i class="fab fa-react"></i><span>React</span>
+          <div class="level">EXPERT</div>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-vuejs"></i><span>Vue</span>
+          <div class="level">PRO</div>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-angular"></i><span>Angular</span>
+          <div class="level">SOLID</div>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-js"></i><span>TS/JS</span>
+          <div class="level">MASTER</div>
+        </div>
+        <!-- backend & db -->
+        <div class="skill-card">
+          <i class="fab fa-node"></i><span>Node.js</span>
+          <div class="level">EXPERT</div>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-python"></i><span>Python</span>
+          <div class="level">ADV</div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-database"></i><span>Postgres</span>
+          <div class="level">EXPERT</div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-database"></i><span>MongoDB</span>
+          <div class="level">DESIGN</div>
+        </div>
+        <!-- special double-wide full stack highlight -->
+        <div class="skill-card fullstack-special">
+          <i class="fas fa-code-branch"></i>
+          <span style="font-weight: 800">FULL‑STACK<br />ARCHITECT</span>
+          <div class="level" style="background: #1d5050">REST / GraphQL</div>
+        </div>
+        <!-- cloud & devops -->
+        <div class="skill-card">
+          <i class="fab fa-aws"></i><span>AWS</span>
+          <div class="level">SOLUTIONS</div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-cloud"></i><span>GCP</span>
+          <div class="level">PRO</div>
+        </div>
+        <div class="skill-card">
+          <i class="fas fa-server"></i><span>Docker</span>
+          <div class="level">K8s</div>
+        </div>
+        <div class="skill-card">
+          <i class="fab fa-git-alt"></i><span>CI/CD</span>
+          <div class="level">PIPELINES</div>
+        </div>
+      </div>
+
+      <!-- ARCHITECTURE HIGHLIGHTS (full-stack mindset) -->
+      <div class="arch-section">
+        <div class="arch-card">
+          <h3><i class="fas fa-cubes" style="color: #5ed9cc"></i> FRONTEND</h3>
+          <ul>
+            <li><i class="fas fa-angle-right"></i> Next.js / Nuxt</li>
+            <li><i class="fas fa-angle-right"></i> Tailwind / Framer</li>
+            <li><i class="fas fa-angle-right"></i> WebGL / Three.js</li>
+            <li><i class="fas fa-angle-right"></i> PWAs / Micro-frontends</li>
+          </ul>
+        </div>
+        <div class="arch-card">
+          <h3><i class="fas fa-code" style="color: #b967ff"></i> BACKEND</h3>
+          <ul>
+            <li><i class="fas fa-angle-right"></i> FastAPI / Django</li>
+            <li><i class="fas fa-angle-right"></i> Express / NestJS</li>
+            <li><i class="fas fa-angle-right"></i> GraphQL federation</li>
+            <li><i class="fas fa-angle-right"></i> RabbitMQ / Kafka</li>
+          </ul>
+        </div>
+        <div class="arch-card">
+          <h3>
+            <i class="fas fa-cloud-upload-alt" style="color: #ffa46b"></i>
+            DEVOPS
+          </h3>
+          <ul>
+            <li><i class="fas fa-angle-right"></i> AWS CDK / Terraform</li>
+            <li><i class="fas fa-angle-right"></i> Kubernetes</li>
+            <li><i class="fas fa-angle-right"></i> Github Actions</li>
+            <li><i class="fas fa-angle-right"></i> Prometheus/Grafana</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- TERMINAL QUOTE + UNIQUE GLOW -->
+      <div class="terminal-line">
+        <span class="prompt">λ fullstack@pro ~ $</span>
+        <span class="cmd"
+          >▸ showcase --skills "react, node, kubernetes, genai" --level
+          pro</span
+        >
+        <span class="glow-orb"></span>
+        <span class="glow-button"
+          ><i class="far fa-copy"></i> 360 ° FULL‑STACK</span
+        >
+      </div>
+
+      <!-- tiny signature for uniqueness -->
+      <div class="signature">
+        <i class="fas fa-bolt"></i> edge · runtime 3.8 · full‑stack core
+        <i class="fas fa-hexagon"></i>
+      </div>
+    </div>
+
+    <script src="skills.js"></script>
+    <noscript
+      >JavaScript makes loader disappear, but you can still enjoy the
+      styles.</noscript
+    >
+  </body>
+</html>
