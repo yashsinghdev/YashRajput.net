@@ -355,9 +355,6 @@ h1 {
   grid-column: 1 / -1;
   text-align: center;
   padding: 3rem;
-  background: rgba(12, 20, 35, 0.4);
-  backdrop-filter: blur(8px);
-  border-radius: 2rem;
 }
 .no-projects-message i {
   font-size: 3rem;
