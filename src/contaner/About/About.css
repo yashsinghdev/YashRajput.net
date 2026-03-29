@@ -1,0 +1,149 @@
+.About {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background: #f0f0f0;
+}
+.left-side {
+  width: 20%;
+  height: 100%;
+  background: #ffb400;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.left-side > img {
+  width: 100%;
+  height: 35%;
+  object-fit: cover;
+  background: gray;
+  filter: grayscale(100%);
+  transition: all 0.4s ease;
+}
+.left-side > img:hover {
+  filter: grayscale(0);
+}
+.left-side > ul {
+  height: 65%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+}
+.left-side > ul > li {
+  font-size: 19px;
+  list-style: none;
+  cursor: pointer;
+
+  font-weight: 700;
+
+  color: black;
+  transition: all 0.3s ease-in-out;
+  animation: Side-Comein 1s 1;
+  animation-timeline: view();
+}
+.left-side > ul > li:hover {
+  color: white;
+  transform: scale(1.1);
+  text-shadow: 0px 2px 10px white;
+
+  border-bottom: 2px solid rgb(17, 17, 169);
+}
+@keyframes Side-Comein {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  6% {
+    transform: translateX(30%);
+  }
+  20% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+  122% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+/* Part 2 */
+.part2 {
+  height: 100vh;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.part2 > h1 {
+  font-size: 90px;
+  font-weight: 700;
+  border: 2px solid gray;
+  padding: 12px 90px;
+  border-radius: 25px;
+  margin-bottom: 35px;
+  animation: about-up-down 1s 1;
+  animation-timeline: view();
+}
+.part2 > h2 {
+  font-size: 28px;
+  font-weight: 400;
+  animation: about-up-down 1s 1;
+  animation-timeline: view();
+}
+#name {
+  font-size: 36px;
+  font-weight: 900;
+  color: purple;
+
+  animation-timeline: view();
+}
+.part2 > p {
+  margin-top: 16px;
+  width: 80%;
+  animation: about-up-down 1s 1;
+  animation-timeline: view();
+}
+.part2 > p > span {
+  font-size: larger;
+  font-weight: 600;
+  color: lightcoral;
+  animation-timeline: view();
+}
+@keyframes about-up-down {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  60% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+#institue {
+  color: blue;
+}
+#class {
+  color: rgb(255, 0, 234);
+}
+#city {
+  color: red;
+}
+#mark {
+  color: rgb(149, 0, 255);
+}
+.part2 > h3 {
+  font-size: 34px;
+  font-weight: 600;
+  border-bottom: 2px solid black;
+  padding-top: 12px;
+  margin-bottom: 6px;
+  animation: about-up-down 1s 1;
+  animation-timeline: view();
+}
+h3 {
+  transform: all 0.4s ease-in-out;
+}

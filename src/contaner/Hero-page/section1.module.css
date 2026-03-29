@@ -1,0 +1,335 @@
+/* NavBar Design  */
+.navcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* background-color: yellow; */
+  height: 90px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+}
+.navbar {
+  height: 60%;
+  width: 60%;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2px 15px;
+  transform: all 0.4s easy-out;
+  animation: UP-down 3s 1;
+  box-shadow: 0px 0px 15px black;
+}
+@keyframes UP-down {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  70% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}
+.items > ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 35px;
+  list-style: none;
+}
+.items > ul > li {
+  margin: 2px;
+  cursor: pointer;
+  font-size: large;
+  font-weight: 500;
+
+  color: white;
+  text-shadow: 0px 4px 11px black;
+  transition: all 0.4s ease-in-out;
+}
+.items > ul > li:hover {
+  margin: 0%;
+  color: orangered;
+  font-weight: 600;
+  border-bottom: 2px solid black;
+  gap: 11px;
+  text-shadow: 0px 0px 15px orangered;
+  transform: scale(1.1);
+}
+
+/* Coder logo design */
+.logo {
+  font-size: larger;
+  font-weight: 700;
+  text-shadow: 0px 0px 15px black;
+}
+/* .hire-me {
+  height: 31px;
+  width: 91px;
+  border-radius: 8px;
+  border: 1px solid orangered;
+  background: white;
+  cursor: pointer;
+  font-weight: 100;
+  transition: all 0.9s ease;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 16px;
+  box-shadow: 0px 0px 11px orangered;
+}
+.hire-me:hover {
+  height: 35px;
+  width: 95px;
+  background-color: orangered;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 1px 4px 15px orangered;
+
+  font-weight: 200;
+} */
+
+/* left-side Hero design  */
+
+.herocon {
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightsidecon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background: rgba(61, 46, 46, 0.207);
+  height: 100%;
+  width: 50%;
+}
+.rightsidecon > img {
+  height: 100%;
+  width: 90%;
+  filter: grayscale(100%);
+
+  transition: all 0.6s ease-in-out;
+  animation:
+    Side-Come 2s 1,
+    Black-white infinite 6s;
+}
+
+@keyframes Side-Come {
+  /* for left side */
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes Black-white {
+  0% {
+    filter: grayscale(100%);
+  }
+  50% {
+    filter: grayscale(0%);
+  }
+  100% {
+    filter: grayscale(100%);
+  }
+}
+/* Right-side Hero design  */
+.leftherocon {
+  padding-left: 22px;
+  padding-right: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  background: wheat;
+  height: 100%;
+  width: 50%;
+  gap: 12px;
+  transition: all 0.6s ease-in-out;
+}
+.leftherocon > h2,
+h1,
+h3,
+span,
+p,
+button {
+  transition: all 0.6s ease-in-out;
+}
+.leftherocon > h2,
+.leftherocon > h1,
+.leftherocon > h3,
+.leftherocon > span,
+.leftherocon > p,
+.leftherocon > .btn > button {
+  animation: Side-come 2s 1;
+}
+@keyframes Side-come {
+  /* for right side */
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+.leftherocon > h2 {
+  font-size: 35px;
+  font-weight: 700;
+}
+.leftherocon > h1 {
+  font-size: 55px;
+  font-weight: 700;
+}
+.leftherocon > h1 > span {
+  color: transparent;
+  -webkit-text-stroke: 1px #ffb400;
+
+  text-shadow: 0px 4px 15px yellow;
+}
+.leftherocon > h3 {
+  margin-left: 11px;
+  font-size: 11px;
+  border-radius: 5px;
+  background: orangered;
+  padding: 5px;
+  box-shadow: 0px 2px 15px orangered;
+}
+.leftherocon > p {
+  color: black;
+  margin-top: 21px;
+  margin-right: 12px;
+  padding-bottom: 12px;
+}
+.leftherocon > .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 12px;
+  gap: 22px;
+}
+.leftherocon > .btn > .CV,
+.project {
+  cursor: pointer;
+  height: 45px;
+  width: 136px;
+  border-radius: 12px;
+  border: none;
+}
+.leftherocon > .btn > .project > a {
+  color: white;
+  font-size: large;
+  font-weight: 400;
+  text-decoration: none;
+}
+.leftherocon > .btn > .project {
+  background: orangered;
+
+  box-shadow: 0px 4px 15px orangered;
+}
+
+.leftherocon > .btn > .project {
+  transition: all 0.5s ease-in-out;
+}
+.leftherocon > .btn > .project:hover {
+  transform: scale(1.1);
+  background-color: black;
+  box-shadow: 0px 4px 15px black;
+  border: 2px solid white;
+}
+.leftherocon > .btn > .CV {
+  background-color: purple;
+  box-shadow: 0px 4px 15px purple;
+
+  transition: all 0.5s ease-in-out;
+  font-size: 17px;
+  font-weight: 300;
+}
+.leftherocon > .btn > .CV > a {
+  color: white;
+  text-decoration: none;
+}
+
+.leftherocon > .btn > .CV:hover {
+  transform: scale(1.1);
+  background-color: gold;
+  box-shadow: 0px 4px 15px black;
+  border: 2px solid white;
+}
+@keyframes Fade-in {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.leftherocon > ul {
+  height: 11%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 21px;
+  animation: Side-come 2s 1;
+}
+.leftherocon > ul > li {
+  list-style: none;
+  border: 1px solid black;
+  padding: 11px;
+  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 0.15);
+  transition: all 0.6s ease-in-out;
+  cursor: pointer;
+}
+.html:hover {
+  background-color: orangered;
+  color: white;
+  scale: 1.06;
+  box-shadow: 0px 3px 15px orangered;
+  border: 2px solid white;
+}
+.react:hover {
+  background-color: lightblue;
+
+  scale: 1.06;
+  box-shadow: 0px 3px 15px lightblue;
+  border: 2px solid white;
+}
+.css:hover {
+  background-color: blue;
+  color: white;
+  scale: 1.06;
+  box-shadow: 0px 3px 15px blue;
+  border: 2px solid white;
+}
+.js:hover {
+  background: rgba(255, 255, 0, 0.5);
+
+  scale: 1.06;
+  box-shadow: 0px 3px 15px rgba(255, 255, 0, 0.15);
+  border: 2px solid white;
+}
+
+body,
+.herocon {
+  overflow-x: hidden;
+}

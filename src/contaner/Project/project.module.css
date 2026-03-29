@@ -1,0 +1,250 @@
+.Projectcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.4s ease-in-out;
+  background: #f0f0f0;
+}
+.prologocon > h1 {
+  transition: all 0.4s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  border: 2px solid gray;
+  padding: 12px 20px;
+  border-radius: 25px;
+  margin-bottom: 35px;
+  margin: 12px;
+  height: 65%;
+  width: 65%;
+  font-size: 90px;
+}
+.prologocon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 12px;
+  animation: slide linear;
+  animation-timeline: view();
+  transition: all 0.4s ease-in-out;
+  height: 78%;
+  width: 78%;
+  margin-bottom: 12px;
+}
+.Projectsec {
+  width: 100%;
+  height: 28%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.Projectsec > h4 > ul {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.4s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 31px;
+}
+.Projectsec > h4 > ul > li {
+  transition: all 0.4s ease-in-out;
+  background-color: purple;
+  color: white;
+  font-size: 16px;
+  list-style: none;
+  border: 2px solid wheat;
+  padding: 12px;
+  border-radius: 12px;
+  cursor: pointer;
+  animation: slide linear;
+  animation-timeline: view();
+}
+.Projectsec > h4 > ul > li:hover {
+  transform: scale(1.1);
+}
+.f1:hover {
+  box-shadow: 0px 3px 15px blueviolet;
+  background: blueviolet;
+
+  border: 2px solid black;
+}
+.f2:hover {
+  box-shadow: 0px 3px 15px grey;
+  background: gray;
+  color: white;
+  border: 2px solid black;
+}
+.f:hover {
+  box-shadow: 0px 3px 15px gold;
+  background: gold;
+  color: black;
+  border: 2px solid black;
+}
+.f3:hover {
+  box-shadow: 0px 3px 15px pink;
+  background: pink;
+  color: black;
+  border: 2px solid black;
+}
+@keyframes slide {
+  0% {
+    transform: translateX(100%);
+  }
+  20% {
+    transform: translateX(0%);
+  }
+}
+/* Project Card */
+.cardcon {
+  width: 100%;
+  height: 66%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.cards {
+  background-color: white;
+  height: 380px;
+  width: 300px;
+
+  border-radius: 15px;
+  border: 2px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.6s ease-in-out;
+  animation: fadein 1.8s linear;
+  animation-timeline: view();
+}
+.cards:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 0px 20px black;
+}
+.top {
+  width: 100%;
+  height: 45%;
+}
+.top > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.center {
+  height: 30%;
+  width: 100%;
+}
+.center > h2 {
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-left: 10px;
+  font-size: 14px;
+}
+.center > ul {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.center > ul > li {
+  font-size: small;
+  margin-left: 4px;
+  margin-top: 4px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  width: 45px;
+  border: 1px solid black;
+  list-style: none;
+  border-radius: 12px;
+  color: gray;
+  font-weight: 700;
+}
+.center > p {
+  margin-left: 20px;
+  padding: 5px;
+  font-size: smaller;
+}
+.dot {
+  height: 4px;
+  width: 4px;
+  color: green;
+  background: green;
+  box-shadow: 0px 2px 6px green;
+  border: 1px solid green;
+  margin-left: 4px;
+  border-radius: 50%;
+}
+.dot > h5 {
+  font-size: small;
+}
+.bottom {
+  width: 86%;
+  height: 20%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25%;
+  border-top: 2px solid #dadada;
+}
+.bottom > button {
+  height: 42px;
+  width: 95px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  font-size: large;
+  font-weight: bold;
+  cursor: pointer;
+}
+.btn1 {
+  background: white;
+  color: black;
+  border: 2px solid black;
+}
+.btn2 {
+  background: black;
+  color: white;
+  border: 2px solid black;
+}
+.bottom > button:hover {
+  height: 46px;
+  width: 115px;
+  color: black;
+  transform: scale(1.1);
+  background: gold;
+  box-shadow: 0px 4px 16px gold;
+  border: 2px solid white;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+}
